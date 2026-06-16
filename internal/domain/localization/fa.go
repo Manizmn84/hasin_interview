@@ -221,6 +221,11 @@ var Persian = map[string]interface{}{
 		"getVehiclesList":           "لیست وسایل نقلیه با موفقیت دریافت شد.",
 		"getParkingInfo":            "دریافت اطلاعات پارکینگ با موفقیت بود.",
 		"getUserParkings":           "پارکینگ های کاربر با موفقیت دریافت شد.",
+		"createTodo":                "ایجاد فعالیت با موفقیت انجام شد.",
+		"getTodo":                   " فعالیت  با موفقیت دریافت شد.",
+		"listTodo":                  "لیست فعالیت ها با موفقیت دریافت شد.",
+		"updateTodo":                "فعالیت با موفقیت بروزرسانی شد.",
+		"deleteTodo":                "فعالیت با موفقیت حذف شد.",
 	},
 	"emailSubject": map[string]interface{}{
 		"emailConfirmation": "تأیید آدرس ایمیل شما",

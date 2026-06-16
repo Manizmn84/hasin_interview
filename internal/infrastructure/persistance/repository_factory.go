@@ -22,3 +22,7 @@ func NewRepositoryFactory(db *gorm.DB, cfg *bootstrap.Config) *RepositoryFactory
 func (rf *RepositoryFactory) ProductRepository() postgresDomain.ProductRepository {
 	return postgres.NewProductRepository(rf.cfg, rf.db)
 }
+
+func (rf *RepositoryFactory) TodoRepository() postgresDomain.TodoRepository {
+	return postgres.NewTodoRepository(rf.cfg, rf.db)
+}

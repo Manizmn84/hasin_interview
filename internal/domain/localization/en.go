@@ -221,6 +221,11 @@ var English = map[string]interface{}{
 		"getVehiclesList":            "Vehicle list fetched successfully.",
 		"getParkingInfo":             "Get the Parking Info is successfully.",
 		"getUserParkings":            "Get The User Parkings is successfully.",
+		"createTodo":                 "Create The todo is successfully.",
+		"getTodo":                    "Get The todo is successfully.",
+		"listTodo":                   "Get The list of todo is successfully.",
+		"updateTodo":                 "Update the Todo is successfully.",
+		"deleteTodo":                 "Delete the Todo is successfully.",
 	},
 	"emailSubject": map[string]interface{}{
 		"emailConfirmation": "Verify Your Email Address",

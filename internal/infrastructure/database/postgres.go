@@ -36,7 +36,7 @@ func NewPostgresDataBase(dbConfig *bootstrap.Database) *gorm.DB {
 		dbInstance = db
 
 		err = dbInstance.AutoMigrate(
-			&entities.Product{},
+			&entities.Todo{},
 		)
 
 		if err != nil {

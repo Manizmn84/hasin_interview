@@ -8,6 +8,7 @@ import (
 	"github.com/Manizmn84/hasin_interview/internal/infrastructure/persistance"
 	"github.com/Manizmn84/hasin_interview/internal/infrastructure/validation"
 	"github.com/Manizmn84/hasin_interview/internal/presentation/controller/v1/product"
+	"github.com/Manizmn84/hasin_interview/internal/presentation/controller/v1/todo"
 	"github.com/Manizmn84/hasin_interview/internal/presentation/middleware"
 	"github.com/Manizmn84/hasin_interview/internal/presentation/routes"
 
@@ -64,9 +65,11 @@ func main() {
 
 	// Services
 	productService := service.NewProductService(cfg, unitOfWork)
+	todoService := service.NewTodoService(cfg, unitOfWork)
 
 	// Controllers
 	productGeneralController := product.NewProductGeneralControler(cfg, productService)
+	todoGeneralController := todo.NewTodoGeneralController(cfg, todoService)
 
 	// mid
 	recoveryMid := middleware.NewRecoveryMiddleware(cfg.Constant)
@@ -85,7 +88,7 @@ func main() {
 		val.RegisterValidation("ir_postal", validation.IranianPostalCodeValidator, true)
 	}
 
-	routes.Run(ginEngine, productGeneralController)
+	routes.Run(ginEngine, productGeneralController, todoGeneralController)
 
 	ginEngine.Run()
 }

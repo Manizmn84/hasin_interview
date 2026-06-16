@@ -4,4 +4,5 @@ import postgresDomain "github.com/Manizmn84/hasin_interview/internal/domain/port
 
 type RepositoryFactory interface {
 	ProductRepository() postgresDomain.ProductRepository
+	TodoRepository() postgresDomain.TodoRepository
 }
