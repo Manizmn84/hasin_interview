@@ -7,7 +7,7 @@
 1. Clone the project.
 2. Run the following command in the `docker` folder to start the application:
    ```bash
-   docker compose up --build
+   docker compose --env-file ../.env up --build
 API Documentation (Testing)
 The backend is running on http://localhost:8080. You can test the endpoints using the following commands in your terminal:
 

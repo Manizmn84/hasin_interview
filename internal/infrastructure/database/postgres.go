@@ -2,7 +2,9 @@ package database
 
 import (
 	"fmt"
+	"log"
 	"sync"
+	"time"
 
 	"github.com/Manizmn84/hasin_interview/bootstrap"
 	"github.com/Manizmn84/hasin_interview/internal/domain/entities"
@@ -14,6 +16,11 @@ import (
 var (
 	dbInstance *gorm.DB
 	dbOnce     sync.Once
+)
+
+const (
+	maxRetries = 10
+	retryDelay = 3 * time.Second
 )
 
 func NewPostgresDataBase(dbConfig *bootstrap.Database) *gorm.DB {
@@ -28,18 +35,27 @@ func NewPostgresDataBase(dbConfig *bootstrap.Database) *gorm.DB {
 	)
 
 	dbOnce.Do(func() {
-		db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+		var db *gorm.DB
+		var err error
+
+		for i := 1; i <= maxRetries; i++ {
+			db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+			if err == nil {
+				break
+			}
+			log.Printf("database connection attempt %d/%d failed: %v", i, maxRetries, err)
+			if i < maxRetries {
+				time.Sleep(retryDelay)
+			}
+		}
+
 		if err != nil {
-			panic(fmt.Errorf("failed to connect database"))
+			panic(fmt.Errorf("failed to connect to database after %d attempts: %w", maxRetries, err))
 		}
 
 		dbInstance = db
 
-		err = dbInstance.AutoMigrate(
-			&entities.Todo{},
-		)
-
-		if err != nil {
+		if err = dbInstance.AutoMigrate(&entities.Todo{}); err != nil {
 			panic(err)
 		}
 	})
