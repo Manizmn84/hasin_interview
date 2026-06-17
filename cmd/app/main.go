@@ -20,38 +20,6 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
-// @securityDefinitions.apikey BearerAuth
-// @in header
-// @name Authorization
-// func main() {
-// 	cfg := bootstrap.Run()
-
-// 	app, err := wire.InitializeApplication(cfg)
-// 	if err != nil {
-// 		log.Fatalf("failed to initialize application: %v", err)
-// 	}
-
-// 	gin.DisableConsoleColor()
-// 	ginEngine := gin.Default()
-
-// 	val, ok := binding.Validator.Engine().(*validator.Validate)
-// 	if ok {
-// 		val.RegisterValidation("ir_phone", validation.IranianMobileValidator, true)
-// 		val.RegisterValidation("ir_postal", validation.IranianPostalCodeValidator, true)
-// 	}
-
-// 	ginEngine.Use(middleware.TranslatorMiddleware(app.Translator))
-// 	ginEngine.Use(app.Middlewares.Recovery.Recovery)
-
-// 	if app.Database.DB == nil {
-// 		log.Fatal("Database instance is nil")
-// 	}
-
-// 	routes.Run(ginEngine)
-
-// 	ginEngine.Run()
-// }
-
 func main() {
 	cfg := bootstrap.Run()
 

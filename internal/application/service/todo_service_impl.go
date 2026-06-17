@@ -2,7 +2,7 @@ package service
 
 import (
 	"github.com/Manizmn84/hasin_interview/bootstrap"
-	"github.com/Manizmn84/hasin_interview/internal/application/dto/todo"
+	tododto "github.com/Manizmn84/hasin_interview/internal/application/dto/todo"
 	"github.com/Manizmn84/hasin_interview/internal/domain/entities"
 	"github.com/Manizmn84/hasin_interview/internal/domain/enums"
 	"github.com/Manizmn84/hasin_interview/internal/domain/logging"
@@ -70,6 +70,7 @@ func (ts *TodoService) GetTodoByID(id uint) (*tododto.GetTodoByIDResponse, error
 	}
 
 	res := &tododto.GetTodoByIDResponse{
+		ID:     todo.ID,
 		Np:     todo.Np,
 		Status: todo.Status.String(),
 		Title:  todo.Title,
