@@ -78,19 +78,21 @@ func (tgc *TodoGeneralController) List(ctx *gin.Context) {
 
 func (tgc *TodoGeneralController) Update(ctx *gin.Context) {
 	type TodoUpdateParam struct {
-		ID    uint    `json:"id" validate:"required"`
-		Title string  `json:"title" validate:"required"`
-		Dsc   string  `json:"dsc" validate:"required"`
-		Np    float64 `json:"np" validate:"numeric"`
+		ID     uint    `uri:"id" validate:"required"`
+		Title  string  `json:"title" validate:"required"`
+		Dsc    string  `json:"dsc" validate:"required"`
+		Np     float64 `json:"np" validate:"numeric"`
+		Status uint    `json:"status" validate:"required,oneof=1 2 3"`
 	}
 
 	params := base.Validated[TodoUpdateParam](ctx)
 
 	updateTodo := tododto.TodoUpdateRequest{
-		ID:    params.ID,
-		Np:    params.Np,
-		Title: params.Title,
-		Dsc:   params.Dsc,
+		ID:     params.ID,
+		Np:     params.Np,
+		Title:  params.Title,
+		Dsc:    params.Dsc,
+		Status: params.Status,
 	}
 
 	err := tgc.todoService.UpdateTodo(updateTodo)

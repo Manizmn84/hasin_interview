@@ -14,7 +14,7 @@ services:
     ports:
       - "5433:5432"
     networks:
-      - vanak_network
+      - hasin_network
     restart: unless-stopped
 
   pgadmin:
@@ -28,7 +28,7 @@ services:
     ports:
       - "8090:80"
     networks:
-      - vanak_network
+      - hasin_network
     restart: unless-stopped
     depends_on:
       - postgres
@@ -41,22 +41,39 @@ services:
     volumes:
       - redis_data:/data
     networks:
-      - vanak_network
+      - hasin_network
     restart: unless-stopped
-  # backend:
-  #   image: registry.hamdocker.ir/mani2005/vanak-backend:latest
-  #   platform: linux/arm64
-  #   container_name: vanak_backend_container
-  #   ports:
-  #     - "8080:8080"
-  #   env_file:
-  #     - ../.env
-  #   networks:
-  #     - vanak_network
-  #   restart: unless-stopped
-  #   depends_on:
-  #     - postgres
-  #     - redis
+
+  
+  backend:
+    build:
+      context: .. 
+      dockerfile: ./docker/Dockerfile 
+    container_name: hasin_backend_container
+    ports:
+      - "8080:8080"
+    env_file:
+      - ../.env 
+    networks:
+      - hasin_network
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+
+  
+  frontend:
+    build:
+      context: ../../hasin_interview_frontend
+      dockerfile: Dockerfile 
+    container_name: hasin_frontend_container
+    ports:
+      - "3000:80"
+    networks:
+      - hasin_network
+    restart: unless-stopped
+    depends_on:
+      - backend
 
 volumes:
   postgres_data:
@@ -64,5 +81,5 @@ volumes:
   redis_data:
 
 networks:
-  vanak_network:
+  hasin_network:
     driver: bridge

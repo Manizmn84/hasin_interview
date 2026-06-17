@@ -6,10 +6,10 @@ type TodoCreateRequest struct {
 	Dsc   string
 }
 
-
 type TodoUpdateRequest struct {
-	ID    uint
-	Np    float64
-	Title string
-	Dsc   string
+	ID     uint
+	Np     float64
+	Title  string
+	Dsc    string
+	Status uint
 }

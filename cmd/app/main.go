@@ -11,6 +11,7 @@ import (
 	"github.com/Manizmn84/hasin_interview/internal/presentation/controller/v1/todo"
 	"github.com/Manizmn84/hasin_interview/internal/presentation/middleware"
 	"github.com/Manizmn84/hasin_interview/internal/presentation/routes"
+	"github.com/gin-contrib/cors"
 
 	// "github.com/Manizmn84/hasin_interview/wire"
 
@@ -81,6 +82,13 @@ func main() {
 	ginEngine := gin.Default()
 	ginEngine.Use(recoveryMid.Recovery)
 	ginEngine.Use(transMid)
+	ginEngine.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:5173", "http://localhost:3000"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+	}))
 
 	val, ok := binding.Validator.Engine().(*validator.Validate)
 	if ok {

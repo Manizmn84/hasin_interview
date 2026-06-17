@@ -111,6 +111,7 @@ func (ts *TodoService) UpdateTodo(todoUpdate tododto.TodoUpdateRequest) error {
 	todo.Title = todoUpdate.Title
 	todo.Dsc = todoUpdate.Dsc
 	todo.Np = todoUpdate.Np
+	todo.Status = enums.TodoStatus(todoUpdate.Status)
 
 	err = ts.unitOfWork.Factory().TodoRepository().UpdateTodo(todo)
 

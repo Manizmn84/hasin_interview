@@ -18,7 +18,7 @@ func SetupGeneralRoutes(router *gin.RouterGroup, productGeneralController *produ
 		todoGroup.POST("/create", todoGeneralController.Create)
 		todoGroup.GET("", todoGeneralController.List)
 		todoGroup.GET("/:id", todoGeneralController.GetByID)
-		todoGroup.PUT("update/:id", todoGeneralController.Update)
-		todoGroup.DELETE("delete/:id", todoGeneralController.Delete)
+		todoGroup.PUT("/update/:id", todoGeneralController.Update)
+		todoGroup.DELETE("/delete/:id", todoGeneralController.Delete)
 	}
 }
